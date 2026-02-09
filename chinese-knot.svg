@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 160">
+  <defs>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <!-- Main Knot Body (Red) -->
+  <path d="M50 10 L80 40 L50 70 L20 40 Z" fill="#d1121d" stroke="#ffd700" stroke-width="2" filter="url(#shadow)"/>
+  <path d="M50 20 L70 40 L50 60 L30 40 Z" fill="none" stroke="#ffd700" stroke-width="1"/>
+  
+  <!-- Center Gold Coin/Button -->
+  <circle cx="50" cy="40" r="8" fill="#ffd700" stroke="#b8860b" stroke-width="1"/>
+  
+  <!-- Tassels -->
+  <g stroke="#d1121d" stroke-width="2">
+    <line x1="50" y1="70" x2="50" y2="80" stroke-width="3"/>
+    <!-- Hanging threads -->
+    <line x1="50" y1="80" x2="30" y2="150" />
+    <line x1="50" y1="80" x2="40" y2="155" />
+    <line x1="50" y1="80" x2="50" y2="160" stroke-width="3"/>
+    <line x1="50" y1="80" x2="60" y2="155" />
+    <line x1="50" y1="80" x2="70" y2="150" />
+  </g>
+  <!-- Gold Rings on Tassels -->
+  <rect x="45" y="80" width="10" height="5" fill="#ffd700"/>
+</svg>

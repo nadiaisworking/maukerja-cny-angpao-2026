@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 180">
+  <defs>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="3" stdDeviation="2" flood-color="#000" flood-opacity="0.2"/>
+    </filter>
+    <!-- Soft Gold Gradient -->
+    <linearGradient id="softGoldFill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFF8C6" /> <!-- Very Pale Gold -->
+      <stop offset="100%" stop-color="#FFD700" /> <!-- Gold -->
+    </linearGradient>
+  </defs>
+  <!-- Main Cloud Shape -->
+  <path d="M0 0 L250 0 C280 0 300 20 300 50 C300 80 280 100 250 100 C250 130 220 160 180 160 C140 160 110 130 110 110 C90 140 50 140 20 120 C5 110 0 90 0 80 Z" 
+        fill="url(#softGoldFill)" stroke="#000000" stroke-width="2" stroke-linejoin="round" filter="url(#shadow)"/>
+  
+  <!-- White highlight/detail lines (Subtler) -->
+  <path d="M220 50 Q240 50 250 70" fill="none" stroke="#FFF" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  <path d="M140 110 Q160 130 190 120" fill="none" stroke="#FFF" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+</svg>

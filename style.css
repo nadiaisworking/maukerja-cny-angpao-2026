@@ -1,0 +1,1098 @@
+/* HUAT THEME OVERHAUL */
+:root {
+    --brand-red: #d1121d;
+    /* Deep rich red */
+    --bright-red: #ff3e3e;
+    --gold: #ffd200;
+    --gold-dark: #b8860b;
+    --white: #ffffff;
+    --glow: rgba(255, 210, 0, 0.8);
+    --shadow: rgba(0, 0, 0, 0.3);
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    color: #333;
+    background-color: var(--brand-red);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* --- Background & Atmosphere --- */
+.background-layers {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: radial-gradient(circle at center top, #aa0e16, #5c0005);
+}
+
+.sunburst {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200vw;
+    height: 200vw;
+    background: repeating-conic-gradient(from 0deg, rgba(255, 200, 0, 0.03) 0deg 10deg, transparent 10deg 20deg);
+    animation: rotateSunburst 80s linear infinite;
+}
+
+@keyframes rotateSunburst {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Golden Hill Curve */
+.logo-container {
+    position: absolute;
+    bottom: 30px;
+    /* Moved up slightly */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+    z-index: 10;
+}
+
+.logo {
+    width: 200px;
+    /* Bigger logo (was ~100px implied) */
+    height: auto;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    opacity: 0.9;
+}
+
+.golden-hill {
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150%;
+    height: 400px;
+    background: radial-gradient(circle at 50% 100%, #ffcc00, #ffaa00);
+    border-radius: 50% 50% 0 0;
+    box-shadow: 0 -20px 50px rgba(255, 165, 0, 0.5);
+    z-index: 1;
+}
+
+/* Floating Elements */
+.floating-coins {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    overflow: hidden;
+}
+
+.lantern,
+.floating-voucher {
+    pointer-events: none;
+    z-index: 5;
+}
+
+.lantern {
+    position: absolute;
+    top: -30px;
+    width: 120px;
+    /* Bigger */
+    height: 180px;
+    /* Bigger */
+    background: url('https://img.icons8.com/color/96/lantern.png') no-repeat center/contain;
+    animation: swing 3s ease-in-out infinite alternate;
+}
+
+.left-lantern {
+    left: 80px;
+    /* Center over left cloud */
+    animation-delay: 0s;
+}
+
+.right-lantern {
+    right: 80px;
+    /* Center over right cloud */
+    animation-delay: 1.5s;
+}
+
+@keyframes swing {
+    from {
+        transform: rotate(-5deg);
+    }
+
+    to {
+        transform: rotate(5deg);
+    }
+
+    to {
+        transform: rotate(5deg);
+    }
+}
+
+/* CNY Corner Decoration */
+.cny-corner {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    height: 250px;
+    background: url('assets/cny-corner.svg') no-repeat top left/contain;
+    z-index: 4;
+    /* On top of sunburst but behind some floaters */
+}
+
+.corner-left {
+    left: 0;
+}
+
+.corner-right {
+    right: 0;
+    transform: scaleX(-1);
+    /* Flip for symmetry */
+}
+
+/* Floating Coins Animation */
+.coin {
+    position: absolute;
+    top: -50px;
+    background: radial-gradient(circle at 30% 30%, #fff1ad, #ffcc00);
+    border-radius: 50%;
+    border: 1px solid #b8860b;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 5;
+    animation-name: fall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    pointer-events: none;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+
+/* Chinese Knots */
+.knot {
+    position: absolute;
+    width: 60px;
+    height: 100px;
+    background: url('assets/chinese-knot.svg') no-repeat center/contain;
+    z-index: 100;
+    /* Ensure visibility */
+    animation: swing 4s ease-in-out infinite alternate;
+}
+
+.left-knot {
+    top: 80px;
+    left: 8%;
+    animation-delay: 1s;
+}
+
+.right-knot {
+    top: 80px;
+    right: 8%;
+    animation-delay: 2.5s;
+}
+
+/* Cherry Blossoms */
+.blossom {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: url('assets/cherry-blossom.svg') no-repeat center/contain;
+    z-index: 100;
+    /* Ensure visibility */
+    opacity: 0.9;
+}
+
+.b1 {
+    top: -75px;
+    /* Clear title with 2cm gap */
+    left: 25%;
+    animation: floatBlossom 6s infinite ease-in-out;
+}
+
+.b2 {
+    top: -100px;
+    /* Clear title with 2cm gap */
+    right: 30%;
+    animation: floatBlossom 8s infinite ease-in-out 1s;
+}
+
+.b3 {
+    top: -120px;
+    /* Clear title with 2cm gap */
+    left: 40%;
+    width: 40px;
+    height: 40px;
+    animation: floatBlossom 10s infinite ease-in-out 2s;
+}
+
+@keyframes floatBlossom {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translateY(-15px) rotate(20deg);
+        opacity: 1;
+    }
+}
+
+/* Big Floating Coins */
+/* Big Floating Coins (Attached to Clouds) */
+.big-coin {
+    position: absolute;
+    width: 70px;
+    /* Slightly smaller for balance */
+    height: 70px;
+    background: radial-gradient(circle at 30% 30%, #fff1ad, #ffcc00);
+    border-radius: 50%;
+    border: 3px solid #b8860b;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 6;
+    /* On top of clouds and lanterns */
+}
+
+.big-coin::after {
+    content: '$';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    font-weight: 900;
+    color: #cb9200;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    font-family: 'Luckiest Guy', cursive;
+}
+
+/* Position relative to clouds (but separated) */
+.c1 {
+    top: 230px;
+    /* Lowered to create gap from cloud */
+    left: 180px;
+    /* Slight adjustment */
+    animation: floatCoinBig 4s ease-in-out infinite alternate;
+}
+
+.c2 {
+    top: 230px;
+    /* Lowered to create gap from cloud */
+    right: 180px;
+    /* Slight adjustment */
+    animation: floatCoinBig 5s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes floatCoinBig {
+    from {
+        transform: translateY(0) rotate(-5deg);
+    }
+
+    to {
+        transform: translateY(-10px) rotate(5deg);
+    }
+}
+
+
+
+/* --- Layout --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.huat-text {
+    font-family: 'Luckiest Guy', cursive;
+    color: #fff;
+    font-size: 5rem;
+    line-height: 1;
+    /* Tighter line height */
+    text-shadow: 4px 4px 0 #900, 0 10px 20px rgba(0, 0, 0, 0.5);
+    transform: rotate(-3deg);
+    margin-bottom: 0;
+    margin-top: 0;
+    /* Forced zero top margin */
+    /* Remove default margin to control gap */
+}
+
+.huat-text .fa-fa-fa {
+    display: block;
+    font-size: 0.4em;
+    color: #ffd700;
+    text-shadow: 2px 2px 0 #d35400;
+    margin-bottom: 10px;
+}
+
+.huat-text .highlight {
+    color: #ee3c4d;
+    -webkit-text-stroke: 1.5px #fff;
+    text-shadow: 4px 4px 0 #800000;
+    /* Deep red shadow */
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+.intro-text {
+    display: inline-block;
+    background: #fff;
+    color: #d1121d;
+    font-weight: 900;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 10px 25px;
+    border-radius: 50px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    margin-top: 20px;
+    /* Controlled gap (closer) */
+    font-style: italic;
+    border: 3px solid #FFD700;
+    animation: pulseBadge 2s infinite ease-in-out;
+}
+
+@keyframes pulseBadge {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 10px 25px rgba(255, 215, 0, 0.6);
+    }
+}
+
+/* Split Layout */
+.game-area-split {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+/* Left Panel: Wheel */
+.left-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wheel-outer {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, #ffcc00, #ff9900);
+    padding: 15px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px;
+    border-radius: 50%;
+    /* Restored */
+}
+
+.wheel {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    /* Restored */
+    border: 10px solid #fff;
+    /* Restored Segments */
+    /* Vibrant Wheel Colors */
+    background: repeating-conic-gradient(#ff0022 0% 12.5%,
+            /* Bright Pop Red */
+            #ffffff 12.5% 25%);
+    position: relative;
+    overflow: hidden;
+    transition: transform 3s cubic-bezier(0.1, 0.7, 1.0, 0.1);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.prizes-row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.prize-pill {
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.prize-pill.gold {
+    background: gold;
+    color: #900;
+    font-weight: bold;
+    box-shadow: 0 0 15px gold;
+}
+
+/* Stacked Wheel Container */
+.wheel-container-stacked {
+    position: relative;
+    width: 460px;
+    /* Slightly wider than wheel for assets */
+    height: 460px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.asset-stack {
+    position: absolute;
+    z-index: 20;
+    pointer-events: none;
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.4));
+}
+
+/* Specific Positions */
+.coins-stack {
+    width: 150px;
+    bottom: -10px;
+    left: -20px;
+    transform: rotate(-10deg);
+    animation: bounceStack 3s infinite ease-in-out;
+}
+
+.mascot-stack {
+    width: 290px;
+    /* Big Naim */
+    bottom: -25px;
+    /* Sit on rim */
+    right: -90px;
+    /* Move closer to edge (Less overlap) */
+    transform: rotate(0deg);
+    /* Straight */
+    z-index: 21;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+    animation: bounceStackStraight 3.5s infinite ease-in-out reverse;
+}
+
+.tng-stack {
+    /* Removed old styles */
+    display: none;
+}
+
+/* Header Decoration TnG */
+.tng-header-decoration {
+    /* Removed */
+    display: none;
+}
+
+/* Top Header Logo */
+.header-logo-top {
+    display: block;
+    width: 150px;
+    /* Medium size as requested */
+    height: auto;
+    margin: 0 auto 0.5cm;
+    /* Perfect 1cm gap */
+    /* Negative margin to pull title up (Counteract line-height/whitespace) */
+    /* Exact 3cm gap as requested */
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    position: relative;
+    z-index: 10;
+}
+
+/* Remove old footer styles */
+.main-footer,
+.footer-logo,
+.logo-next-mascot,
+.centered-logo,
+.logo-container {
+    display: none;
+}
+
+/* Sparks */
+.spark {
+    position: absolute;
+    color: #ffd700;
+    /* Gold */
+    font-size: 3rem;
+    z-index: 25;
+    text-shadow: 0 0 10px #fff;
+    pointer-events: none;
+}
+
+.s1 {
+    top: 0;
+    right: 20px;
+    animation: twinkle 2s infinite;
+}
+
+.s2 {
+    top: 40px;
+    right: 0;
+    font-size: 2rem;
+    animation: twinkle 3s infinite 0.5s;
+}
+
+.s3 {
+    bottom: 100px;
+    right: 50px;
+    font-size: 1.5rem;
+    animation: twinkle 2.5s infinite 1s;
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(0.8) rotate(0deg);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2) rotate(45deg);
+        filter: brightness(1.5);
+    }
+}
+
+/* Reusing bounce/float animations from before */
+@keyframes bounceStack {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(-10deg);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(-10deg);
+    }
+}
+
+/* Specific Straight Bounce for Naim */
+@keyframes bounceStackStraight {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(0deg);
+    }
+}
+
+/* Gold Pot removed - replaced with Assets Grid */
+.assets-grid {
+    display: none;
+}
+
+/* Asset Animations */
+.bounce-1 {
+    animation: bounceAsset 2s infinite ease-in-out;
+}
+
+.bounce-2 {
+    animation: bounceAsset 2.5s infinite ease-in-out reverse;
+}
+
+.float-1 {
+    animation: floatAsset 3s infinite ease-in-out;
+}
+
+.float-2 {
+    animation: floatAsset 3.5s infinite ease-in-out reverse;
+}
+
+@keyframes bounceAsset {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes floatAsset {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(3deg);
+    }
+
+    75% {
+        transform: rotate(-3deg);
+    }
+}
+
+/* Right Panel: Form Card */
+.right-panel {
+    flex: 1;
+    max-width: 450px;
+    margin-right: 50px;
+    /* Pull away from right edge */
+}
+
+.huat-form-card {
+    background: #fff;
+    border-radius: 30px;
+    padding: 20px 30px 30px 30px;
+    /* Reduced top padding (was 40px) */
+    border: 8px solid #ffcc00;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    position: relative;
+    transform: rotate(2deg);
+}
+
+.tng-card-decoration {
+    position: absolute;
+    top: -40px;
+    right: -20px;
+    width: 130px;
+    transform: rotate(10deg);
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+    animation: floatAsset 3s infinite ease-in-out;
+}
+
+.ribbon-header {
+    display: none;
+    /* Removed */
+}
+
+.form-title {
+    color: #d1121d;
+    font-weight: 900;
+    margin-bottom: 15px;
+    /* Tighter gap */
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    margin-top: 10px;
+    /* Small top margin */
+}
+
+/* Ticket Container */
+.ticket-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Ticket Base Shape - Modern Funfair Style */
+.ticket {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 100px;
+    /* Glossy Red Gradient */
+    background: linear-gradient(180deg, #ff4d4d 0%, #cc0000 100%);
+    /* Rounded Card */
+    border-radius: 20px;
+    /* 3D Depth */
+    box-shadow:
+        inset 0 2px 2px rgba(255, 255, 255, 0.4),
+        /* Top Highlight */
+        0 8px 0 #990000,
+        /* 3D Side */
+        0 15px 20px rgba(0, 0, 0, 0.3);
+    /* Drop Shadow */
+
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    margin-bottom: 10px;
+    /* Space for 3D depth */
+    overflow: hidden;
+    /* Clip inner content */
+}
+
+.ticket:active {
+    transform: translateY(4px);
+    box-shadow:
+        inset 0 2px 2px rgba(255, 255, 255, 0.4),
+        0 4px 0 #990000,
+        0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Shine effect/Gloss overlay */
+.ticket::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
+    border-radius: 20px 20px 0 0;
+    pointer-events: none;
+}
+
+/* Premium Gold Ticket Variant */
+.ticket.ticket-premium {
+    background: linear-gradient(180deg, #ffd700 0%, #ffaa00 100%);
+    box-shadow:
+        inset 0 2px 2px rgba(255, 255, 255, 0.6),
+        0 8px 0 #b8860b,
+        0 15px 20px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.ticket.ticket-premium:active {
+    box-shadow:
+        inset 0 2px 2px rgba(255, 255, 255, 0.6),
+        0 4px 0 #b8860b,
+        0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Left Section: Info */
+.ticket-main {
+    flex: 1;
+    padding: 10px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+}
+
+.ticket-title {
+    font-family: 'Luckiest Guy', cursive;
+    /* Keep the fun font */
+    font-size: 1.8rem;
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+    text-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
+    letter-spacing: 1px;
+}
+
+.ticket-desc {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 4px 10px;
+    border-radius: 50px;
+    display: inline-block;
+    align-self: flex-start;
+}
+
+.ticket.ticket-premium .ticket-title {
+    color: #900000;
+    /* Dark red on gold */
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.ticket.ticket-premium .ticket-desc {
+    color: #900000;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Perforation Line - REPLACED WITH DIVIDER */
+.ticket-perforation-line {
+    display: none;
+    /* Hide old perforation */
+}
+
+/* Right Section: Stub/Action */
+.ticket-stub {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 20px;
+    z-index: 2;
+    position: relative;
+}
+
+/* "Pill" Shape Button with Pushed-in Logic */
+.ticket-action-btn {
+    width: auto;
+    height: auto;
+    padding: 12px 25px;
+    border-radius: 50px;
+    /* Pill shape */
+    background: #fff;
+    color: #d1121d;
+    border: none;
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 1.1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: 0 4px 0 #d1d1d1, 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.1s;
+    text-shadow: none;
+    display: inline-block;
+}
+
+.ticket-action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #d1d1d1, 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+.ticket-action-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 #d1d1d1, 0 0 0 rgba(0, 0, 0, 0);
+}
+
+/* Gold Button for Premium (Red text on White/Gold button) */
+.ticket-action-btn.btn-gold {
+    background: #d1121d;
+    color: #ffd700;
+    box-shadow: 0 4px 0 #900000, 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.ticket-action-btn.btn-gold:hover {
+    box-shadow: 0 6px 0 #900000, 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+.ticket-action-btn.btn-gold:active {
+    box-shadow: 0 0 0 #900000, 0 0 0 rgba(0, 0, 0, 0);
+}
+
+/* Buttons */
+.select-btn {
+    padding: 10px 20px;
+    background: linear-gradient(to bottom, #ff4d4d, #cc0000);
+    /* Red Gradient */
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    color: #fff;
+    /* White text */
+    cursor: pointer;
+    box-shadow: 0 4px 0 #990000;
+    transition: all 0.1s;
+}
+
+.select-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #990000;
+}
+
+.big-red-btn {
+    background: #ee3c4d;
+    color: #fff;
+    font-size: 1.1rem;
+    padding: 15px 35px;
+    border-radius: 50px;
+    /* Pill shape */
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #b02c39, 0 10px 20px rgba(0, 0, 0, 0.2);
+    /* 3D Effect matching Reference */
+    transition: all 0.1s;
+    text-transform: uppercase;
+    font-family: 'Luckiest Guy', cursive;
+    letter-spacing: 1px;
+}
+
+.big-red-btn:active {
+    transform: translateY(5px);
+    box-shadow: 0 0 0 #b02c39, 0 0 0 rgba(0, 0, 0, 0);
+}
+
+/* Modal Styling */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 2000;
+    /* Super high Z-Index */
+    display: none;
+    /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+.modal-overlay.active {
+    display: flex;
+    /* Show when active */
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-card {
+    background: #fff;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    border: 5px solid #ffcc00;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2rem;
+    color: #aaa;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: #d1121d;
+}
+
+.modal-header h2 {
+    color: #d1121d;
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 2.5rem;
+    margin: 0 0 10px;
+    text-shadow: 2px 2px 0 #ffd700;
+}
+
+.modal-header p {
+    color: #555;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+/* Form Elements */
+#email-form input,
+#login-form input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+#email-form input:focus,
+#login-form input:focus {
+    border-color: #ffcc00;
+}
+
+.disclaimer-text {
+    background: #fffdf0;
+    border: 1px dashed #ffd700;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.disclaimer-text p {
+    font-size: 0.85rem;
+    color: #555;
+    margin: 5px 0;
+    line-height: 1.4;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(to bottom, #d1121d, #900000);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #600000;
+    transition: transform 0.1s, box-shadow 0.1s;
+    box-sizing: border-box;
+}
+
+.submit-btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 #600000;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 900px) {
+    .game-area-split {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .wheel-outer {
+        width: 300px;
+        height: 300px;
+    }
+
+    .huat-text {
+        font-size: 3.5rem;
+    }
+
+    .golden-hill {
+        bottom: -50px;
+        height: 200px;
+    }
+}
+
+/* Modal Instruction Image */
+/* Modal Instruction Image */
+.modal-instruction-img {
+    display: block;
+    margin: 10px auto;
+    width: 100%;
+    max-width: 220px;
+    /* Reduced further per user request */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

