@@ -1063,24 +1063,121 @@ body {
 }
 
 /* Mobile Responsiveness */
+/* Mobile Responsiveness & Alignment Fixes */
 @media (max-width: 900px) {
-    .game-area-split {
-        flex-direction: column;
-        gap: 30px;
+
+    /* 1. Global Container Fixes */
+    .container {
+        padding: 15px;
+        width: 100%;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        /* Prevent horizontal scroll */
     }
 
-    .wheel-outer {
-        width: 300px;
-        height: 300px;
+    /* 2. Structured Vertical Layout */
+    .game-area-split {
+        flex-direction: column;
+        align-items: center;
+        /* Strict center alignment */
+        gap: 40px;
+        /* Standardized vertical gap */
+        width: 100%;
+    }
+
+    /* 3. Header Alignment */
+    .header {
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header-logo-top {
+        margin: 0 auto 15px;
+        /* Center logo */
     }
 
     .huat-text {
-        font-size: 3.5rem;
+        font-size: 3.2rem;
+        text-align: center;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .intro-text {
+        margin-top: 5px;
+        font-size: 1rem;
+        padding: 8px 20px;
+    }
+
+    /* 4. Wheel Section Alignment */
+    .left-panel {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+    }
+
+    .wheel-container-stacked {
+        margin: 0 auto;
+        /* Force center */
+        transform: scale(0.85);
+        /* Slightly smaller to fit perfectly */
+        transform-origin: center center;
+    }
+
+    .wheel-outer {
+        /* Dimensions handled by scaling parent, keeps aspect ratio */
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    /* 5. Form Section Alignment */
+    .right-panel {
+        width: 100%;
+        margin: 0;
+        /* Remove side margins */
+        padding: 0 10px;
+        /* Slight buffer */
+        display: flex;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+
+    .huat-form-card {
+        margin: 0 auto;
+        /* Center card */
+        transform: none;
+        /* Remove jaunty angle for cleaner mobile look */
+        width: 100%;
+        max-width: 380px;
+        /* Consistent width */
+        border-width: 5px;
+        padding: 20px;
+    }
+
+    /* 6. Decoration Fixes */
+    .tng-card-decoration {
+        right: -10px;
+        top: -30px;
+        width: 100px;
     }
 
     .golden-hill {
-        bottom: -50px;
-        height: 200px;
+        bottom: -30px;
+        height: 180px;
+    }
+
+    /* 7. Ticket Sizing */
+    .ticket {
+        height: auto;
+        min-height: 90px;
+    }
+
+    .ticket-title {
+        font-size: 1.5rem;
     }
 }
 
