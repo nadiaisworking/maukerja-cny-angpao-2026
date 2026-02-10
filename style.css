@@ -1077,14 +1077,69 @@ body {
         /* Add breathing room top */
     }
 
-    /* 1b. Hide Cluttering Decorations */
+    /* 1b. Refine (Don't Hide) Decorations */
     .lantern,
-    .cny-corner,
     .knot,
-    .blossom,
+    .cny-corner,
     .big-coin,
+    .blossom,
     .floating-coins {
-        display: none !important;
+        display: block !important;
+        /* Bring them back */
+    }
+
+    /* Scale down and push to edges to frame effectively */
+    .lantern {
+        transform: scale(0.6);
+        top: -10px;
+    }
+
+    .left-lantern {
+        left: -20px;
+    }
+
+    .right-lantern {
+        right: -20px;
+    }
+
+    .knot {
+        transform: scale(0.5);
+        top: 60px;
+        /* Below lantern */
+    }
+
+    .left-knot {
+        left: -10px;
+    }
+
+    .right-knot {
+        right: -10px;
+    }
+
+    .cny-corner {
+        width: 150px;
+        /* Smaller corner */
+        height: 150px;
+    }
+
+    /* Push big coins away from title */
+    .big-coin {
+        transform: scale(0.6);
+    }
+
+    .c1 {
+        top: 120px;
+        left: -20px;
+    }
+
+    .c2 {
+        top: 120px;
+        right: -20px;
+    }
+
+    /* Subtle background coins */
+    .floating-coins {
+        opacity: 0.5;
     }
 
     /* 2. Structured Vertical Layout */
