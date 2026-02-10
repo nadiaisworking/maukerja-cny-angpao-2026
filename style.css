@@ -1073,6 +1073,18 @@ body {
         box-sizing: border-box;
         overflow-x: hidden;
         /* Prevent horizontal scroll */
+        padding-top: 40px;
+        /* Add breathing room top */
+    }
+
+    /* 1b. Hide Cluttering Decorations */
+    .lantern,
+    .cny-corner,
+    .knot,
+    .blossom,
+    .big-coin,
+    .floating-coins {
+        display: none !important;
     }
 
     /* 2. Structured Vertical Layout */
