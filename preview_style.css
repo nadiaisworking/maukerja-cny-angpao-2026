@@ -1262,79 +1262,136 @@ body {
 }
 
 /* --- SUPER COMPACT MOBILE FIX (Under 480px) --- */
-@media (max-width: 480px) {
+/* --- FLUID MOBILE LAYOUT (Responsive for all devices) --- */
+@media (max-width: 600px) {
 
-    /* Aggressive Header Scaling */
+    /* 1. Fluid Container */
+    .container {
+        padding: 20px 10px;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    /* 2. Fluid Header Scaling */
+    .header {
+        margin-bottom: 2vh;
+    }
+
     .huat-text {
-        font-size: 13vw;
-        /* Dynamic sizing based on viewport width */
+        font-size: clamp(2.5rem, 13vw, 4rem);
+        /* Responsive text size */
         margin-bottom: 5px;
+        line-height: 1.1;
     }
 
     .header-logo-top {
-        width: 100px;
-        margin-bottom: 10px;
+        width: 25vw;
+        /* Scale logo with screen */
+        max-width: 120px;
+        margin-bottom: 15px;
     }
 
     .intro-text {
-        font-size: 0.85rem;
+        font-size: clamp(0.8rem, 4vw, 1rem);
         padding: 5px 15px;
-        margin-top: 5px;
         white-space: nowrap;
-        /* Prevent awkward wrapping */
     }
 
-    /* Aggressive Wheel Scaling */
+    /* 3. Fluid Wheel Section (The Core Fix) */
+    .game-area-split {
+        gap: 20px;
+        width: 100%;
+    }
+
+    .left-panel {
+        width: 100%;
+        padding: 0;
+    }
+
     .wheel-container-stacked {
-        transform: scale(0.65);
-        /* Shrink significantly */
-        margin-top: -30px;
-        /* Pull it up closer to header */
-        margin-bottom: -30px;
-        /* Pull form closer */
+        /* No more forced scaling! Use natural width */
+        width: 90vw;
+        max-width: 380px;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        /* Keep it perfectly square */
+        margin: 0 auto;
+        transform: none;
+        /* Reset desktop transforms */
     }
 
-    /* Decoration Management */
+    .wheel-outer {
+        width: 100%;
+        height: 100%;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Assets scale relatively */
+    .asset-stack {
+        transform-origin: center;
+    }
+
+    .coins-stack {
+        width: 35%;
+        /* Relative to container */
+        left: -5%;
+        bottom: -5%;
+    }
+
+    .mascot-stack {
+        width: 65%;
+        /* Relative to container */
+        right: -15%;
+        bottom: -5%;
+    }
+
+    /* 4. Fluid Form Card */
+    .right-panel {
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    .huat-form-card {
+        width: 100%;
+        max-width: 100%;
+        /* Take full available width */
+        box-sizing: border-box;
+        padding: 20px;
+        border-width: 4px;
+        /* Slightly thinner border for mobile */
+        transform: rotate(0deg);
+        /* Straighten it out */
+    }
+
+    /* 5. Cleanup Decorations for Clean Mobile View */
+    .lantern,
+    .knot,
+    .big-coin {
+        /* Push them to the very edge or hide if too cluttered */
+        transform: scale(0.5);
+    }
+
     .lantern {
-        transform: scale(0.4);
-        top: -30px;
+        top: -20px;
     }
 
     .left-lantern {
-        left: -30px;
+        left: -40px;
     }
 
     .right-lantern {
-        right: -30px;
+        right: -40px;
     }
 
-    .knot {
-        transform: scale(0.4);
-        top: 20px;
-    }
-
-    /* Hide Big Coins on really small screens to reduce clutter/overflow */
     .big-coin {
         display: none !important;
+        /* Hide floating coins on mobile for cleanliness */
     }
 
-    /* Compact Form Card */
-    .huat-form-card {
-        padding: 15px;
-        border-width: 4px;
-        width: 95%;
-        /* Use almost full width */
-    }
-
-    .form-title {
-        font-size: 1.2rem;
-        margin-bottom: 10px;
-    }
-
-    /* Compact Tickets */
+    /* 6. Tickets */
     .ticket {
-        min-height: 80px;
-        padding: 0;
+        min-height: auto;
+        padding: 10px 0;
     }
 
     .ticket-main {
@@ -1342,26 +1399,78 @@ body {
     }
 
     .ticket-title {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
+    }
+}
+/* --- PHASE 2 RE-WRITE (FORCE CIRCLE & SPACING) --- */
+@media (max-width: 600px) {
+    /* 1. Header Spacing - PUSH IT UP */
+    .header {
+        margin-bottom: 2rem !important; 
+    }
+    
+    .huat-text {
+        font-size: clamp(2rem, 11vw, 3.5rem) !important;
+        margin-bottom: 15px !important;
+        line-height: 1 !important;
     }
 
-    .ticket-desc {
-        font-size: 0.75rem;
-    }
-
-    .ticket-action-btn {
-        padding: 8px 15px;
-        font-size: 0.9rem;
-    }
-
-    /* Layout Vertical Rhythm */
+    /* 2. Wheel Container - FORCE SQUARE & CIRCLE */
     .game-area-split {
-        gap: 10px;
-        /* Reduce gap between wheel and form */
+        margin-top: 30px !important; /* Explicit gap from header */
+        gap: 20px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
     }
 
-    .container {
-        padding-top: 20px;
-        /* Less top padding */
+    .wheel-container-stacked {
+        /* Force Width = Height using Viewport Units */
+        width: 85vw !important;
+        height: 85vw !important; /* THIS FORCES SQUARE ASPECT RATIO */
+        max-width: 380px !important;
+        max-height: 380px !important;
+        
+        position: relative !important;
+        margin: 0 auto !important;
+        transform: none !important;
+        aspect-ratio: 1 / 1 !important; /* Redundant but safe */
     }
+
+    .wheel-outer {
+        width: 100% !important;
+        height: 100% !important;
+        border-radius: 50% !important; /* Force Circle */
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
+    }
+
+    /* 3. Asset Scaling */
+    .coins-stack {
+        width: 35% !important;
+        left: -5% !important;
+        bottom: -5% !important;
+    }
+
+    .mascot-stack {
+        width: 60% !important;
+        right: -10% !important;
+        bottom: -5% !important;
+    }
+
+    /* 4. Form Card */
+    .right-panel {
+        width: 100% !important;
+        padding: 0 15px !important;
+    }
+
+    .huat-form-card {
+        width: 100% !important;
+        transform: none !important;
+        margin-top: 20px !important;
+    }
+
+    /* 5. Clean Up */
+    .big-coin { display: none !important; }
+    .lantern, .knot { transform: scale(0.5); }
+    .lantern { top: -20px; }
 }

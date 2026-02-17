@@ -1260,14 +1260,11 @@ body {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
 /* --- SUPER COMPACT MOBILE FIX (Under 480px) --- */
 @media (max-width: 480px) {
-
     /* Aggressive Header Scaling */
     .huat-text {
-        font-size: 13vw;
-        /* Dynamic sizing based on viewport width */
+        font-size: 13vw; /* Dynamic sizing based on viewport width */
         margin-bottom: 5px;
     }
 
@@ -1280,18 +1277,14 @@ body {
         font-size: 0.85rem;
         padding: 5px 15px;
         margin-top: 5px;
-        white-space: nowrap;
-        /* Prevent awkward wrapping */
+        white-space: nowrap; /* Prevent awkward wrapping */
     }
 
     /* Aggressive Wheel Scaling */
     .wheel-container-stacked {
-        transform: scale(0.65);
-        /* Shrink significantly */
-        margin-top: -30px;
-        /* Pull it up closer to header */
-        margin-bottom: -30px;
-        /* Pull form closer */
+        transform: scale(0.65); /* Shrink significantly */
+        margin-top: -30px; /* Pull it up closer to header */
+        margin-bottom: -30px; /* Pull form closer */
     }
 
     /* Decoration Management */
@@ -1299,14 +1292,9 @@ body {
         transform: scale(0.4);
         top: -30px;
     }
-
-    .left-lantern {
-        left: -30px;
-    }
-
-    .right-lantern {
-        right: -30px;
-    }
+    
+    .left-lantern { left: -30px; }
+    .right-lantern { right: -30px; }
 
     .knot {
         transform: scale(0.4);
@@ -1322,8 +1310,7 @@ body {
     .huat-form-card {
         padding: 15px;
         border-width: 4px;
-        width: 95%;
-        /* Use almost full width */
+        width: 95%; /* Use almost full width */
     }
 
     .form-title {
@@ -1353,15 +1340,13 @@ body {
         padding: 8px 15px;
         font-size: 0.9rem;
     }
-
+    
     /* Layout Vertical Rhythm */
     .game-area-split {
-        gap: 10px;
-        /* Reduce gap between wheel and form */
+        gap: 10px; /* Reduce gap between wheel and form */
     }
-
+    
     .container {
-        padding-top: 20px;
-        /* Less top padding */
+        padding-top: 20px; /* Less top padding */
     }
 }
