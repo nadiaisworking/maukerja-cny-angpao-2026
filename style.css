@@ -1260,3 +1260,93 @@ body {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+/* --- SUPER COMPACT MOBILE FIX (Under 480px) --- */
+@media (max-width: 480px) {
+    /* Aggressive Header Scaling */
+    .huat-text {
+        font-size: 13vw; /* Dynamic sizing based on viewport width */
+        margin-bottom: 5px;
+    }
+
+    .header-logo-top {
+        width: 100px;
+        margin-bottom: 10px;
+    }
+
+    .intro-text {
+        font-size: 0.85rem;
+        padding: 5px 15px;
+        margin-top: 5px;
+        white-space: nowrap; /* Prevent awkward wrapping */
+    }
+
+    /* Aggressive Wheel Scaling */
+    .wheel-container-stacked {
+        transform: scale(0.65); /* Shrink significantly */
+        margin-top: -30px; /* Pull it up closer to header */
+        margin-bottom: -30px; /* Pull form closer */
+    }
+
+    /* Decoration Management */
+    .lantern {
+        transform: scale(0.4);
+        top: -30px;
+    }
+    
+    .left-lantern { left: -30px; }
+    .right-lantern { right: -30px; }
+
+    .knot {
+        transform: scale(0.4);
+        top: 20px;
+    }
+
+    /* Hide Big Coins on really small screens to reduce clutter/overflow */
+    .big-coin {
+        display: none !important;
+    }
+
+    /* Compact Form Card */
+    .huat-form-card {
+        padding: 15px;
+        border-width: 4px;
+        width: 95%; /* Use almost full width */
+    }
+
+    .form-title {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+    /* Compact Tickets */
+    .ticket {
+        min-height: 80px;
+        padding: 0;
+    }
+
+    .ticket-main {
+        padding: 5px 15px;
+    }
+
+    .ticket-title {
+        font-size: 1.3rem;
+    }
+
+    .ticket-desc {
+        font-size: 0.75rem;
+    }
+
+    .ticket-action-btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+    
+    /* Layout Vertical Rhythm */
+    .game-area-split {
+        gap: 10px; /* Reduce gap between wheel and form */
+    }
+    
+    .container {
+        padding-top: 20px; /* Less top padding */
+    }
+}
